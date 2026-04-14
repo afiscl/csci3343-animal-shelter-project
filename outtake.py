@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
 import math 
-import seaborn as sns
 import matplotlib.pyplot as plt
 import statsmodels.api as sm
 
@@ -35,14 +34,30 @@ nonBlankOutComes = outtakes[outtakes['Outcome Type'].str.len() > 0]
 # 49% for our limited view of texas?
 
 # get count of each outcome type (sort false to preserve order)
-labelVals = nonBlankOutComes['Outcome Type'].value_counts(sort=False)
+#labelVals = nonBlankOutComes['Outcome Type'].value_counts(sort=False)
 
 # save counts + labels to seperate lists 
-values = labelVals.to_list()
-labels = nonBlankOutComes['Outcome Type'].unique()
-print(labelVals.to_list())
+# values = labelVals.to_list()
+# labels = nonBlankOutComes['Outcome Type'].unique()
+# print(labelVals.to_list())
 
 # plug into pie chart
-fig, ax = plt.subplots()
-ax.pie(values, labels=labels)
+# fig, ax = plt.subplots()
+# ax.pie(values, labels=labels)
+# plt.show()
+
+allAdoptedDogs = outtakes[(outtakes['Outcome Type'] == 'Adoption')  & (outtakes['Animal Type'] == 'Dog')]
+#print(allAdoptedDogs)
+labelVals = allAdoptedDogs['Breed'].value_counts(sort=False)
+values = labelVals.to_list()
+labels = allAdoptedDogs['Breed'].unique()
+print(allAdoptedDogs['Breed'].value_counts())
+df = pd.DataFrame({'label': labels, 'value': values})
+df = df.sort_values('value', ascending=False).head(15)
+plt.title("Top 15 dog breeds in Austin by adoptions")
+plt.xlabel("Number of adopts")
+plt.ylabel("Dog breeds")
+plt.barh(df['label'], df['value'])
+plt.gca().invert_yaxis()
 plt.show()
+
