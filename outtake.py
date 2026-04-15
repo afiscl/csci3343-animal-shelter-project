@@ -10,6 +10,7 @@ outtakes = pd.read_csv("Austin_Animal_Center_Outcomes__10_01_2013_to_05_05_2025_
 # print(len(outtakes.index))
 
 nonBlankOutComes = outtakes[outtakes['Outcome Type'].str.len() > 0]
+allAdoptedSpecies = outtakes[(outtakes['Outcome Type'] == 'Adoption')]
 # print('filtered out blank outcome types.. new length:')
 # print(len(nonBlankOutComes.index))
 
@@ -33,31 +34,48 @@ nonBlankOutComes = outtakes[outtakes['Outcome Type'].str.len() > 0]
 # nearly 49% adoption rate(?) in austin animal center 
 # 49% for our limited view of texas?
 
-# get count of each outcome type (sort false to preserve order)
-#labelVals = nonBlankOutComes['Outcome Type'].value_counts(sort=False)
+# see biggest outcome
+# labelVals = nonBlankOutComes['Outcome Type'].value_counts(sort=False)
 
-# save counts + labels to seperate lists 
+# # save counts + labels to seperate lists 
 # values = labelVals.to_list()
 # labels = nonBlankOutComes['Outcome Type'].unique()
 # print(labelVals.to_list())
 
-# plug into pie chart
+# # plug into pie chart
 # fig, ax = plt.subplots()
 # ax.pie(values, labels=labels)
 # plt.show()
 
-allAdoptedDogs = outtakes[(outtakes['Outcome Type'] == 'Adoption')  & (outtakes['Animal Type'] == 'Dog')]
-#print(allAdoptedDogs)
-labelVals = allAdoptedDogs['Breed'].value_counts(sort=False)
-values = labelVals.to_list()
-labels = allAdoptedDogs['Breed'].unique()
-print(allAdoptedDogs['Breed'].value_counts())
-df = pd.DataFrame({'label': labels, 'value': values})
-df = df.sort_values('value', ascending=False).head(15)
-plt.title("Top 15 dog breeds in Austin by adoptions")
-plt.xlabel("Number of adopts")
-plt.ylabel("Dog breeds")
-plt.barh(df['label'], df['value'])
-plt.gca().invert_yaxis()
-plt.show()
+# top dog breeds
+# allAdoptedDogs = outtakes[(outtakes['Outcome Type'] == 'Adoption')  & (outtakes['Animal Type'] == 'Dog')]
+# labelVals = allAdoptedDogs['Breed'].value_counts(sort=False)
+# values = labelVals.to_list()
+# labels = allAdoptedDogs['Breed'].unique()
+# print(allAdoptedDogs['Breed'].value_counts())
+# df = pd.DataFrame({'label': labels, 'value': values})
+# df = df.sort_values('value', ascending=False).head(15)
+# plt.title("Top 15 dog breeds in Austin by adoptions")
+# plt.xlabel("Number of adopts")
+# plt.ylabel("Dog breeds")
+# plt.barh(df['label'], df['value'])
+# plt.gca().invert_yaxis()
+# plt.show()
+
+# top adopted species
+# labelVals = allAdoptedSpecies['Animal Type'].value_counts()
+# print(labelVals)
+
+# get specific about the 'other' section
+# otherBits = allAdoptedSpecies[(allAdoptedSpecies['Outcome Type'] == 'Adoption') & (allAdoptedSpecies['Animal Type'] == 'Other')]
+# print(otherBits['Breed'].value_counts(sort=False))
+
+# top age - dont know how reliable this is. this is only the AGE of the animal, not its length of stay in the center.
+# labelVals = allAdoptedSpecies['Age upon Outcome'].value_counts()
+# print(labelVals)
+
+
+# top sex
+# labelVals = allAdoptedSpecies['Sex upon Outcome'].value_counts()
+# print(labelVals)
 
