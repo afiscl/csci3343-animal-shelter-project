@@ -35,7 +35,9 @@ allAdoptedSpecies = outtakes[(outtakes['Outcome Type'] == 'Adoption')]
 # 49% for our limited view of texas?
 
 # see biggest outcome
-# labelVals = nonBlankOutComes['Outcome Type'].value_counts(sort=False)
+df = pd.DataFrame(nonBlankOutComes['Outcome Type'].value_counts().head(4))
+df.plot.bar(legend=None,title='Most Common Outcomes')
+plt.show()
 
 # # save counts + labels to seperate lists 
 # values = labelVals.to_list()
@@ -63,8 +65,9 @@ allAdoptedSpecies = outtakes[(outtakes['Outcome Type'] == 'Adoption')]
 # plt.show()
 
 # top adopted species
-# labelVals = allAdoptedSpecies['Animal Type'].value_counts()
-# print(labelVals)
+# df = pd.DataFrame({'Animal Type': ['Dog','Cat','Other'], 'count':[47475,35784,1002+323+17]})
+# plot = df.plot.pie(y="count", figsize=(11, 6),labels=df['Animal Type'].values,legend=None,autopct='%1.1f%%',title='Most Adopted Animals By Breed')
+# plt.show()
 
 # get specific about the 'other' section
 # otherBits = allAdoptedSpecies[(allAdoptedSpecies['Outcome Type'] == 'Adoption') & (allAdoptedSpecies['Animal Type'] == 'Other')]
