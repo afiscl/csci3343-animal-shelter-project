@@ -7,12 +7,12 @@ import statsmodels.api as sm
 outtakes = pd.read_csv("Austin_Animal_Center_Outcomes__10_01_2013_to_05_05_2025_.csv")
 # print(outtakes['Outcome Type'])
 # print('length of data wo filtering:')
-# print(len(outtakes.index))
+print(len(outtakes.index))
 
 nonBlankOutComes = outtakes[outtakes['Outcome Type'].str.len() > 0]
 allAdoptedSpecies = outtakes[(outtakes['Outcome Type'] == 'Adoption')]
 # print('filtered out blank outcome types.. new length:')
-# print(len(nonBlankOutComes.index))
+print(len(nonBlankOutComes.index))
 
 # print('all possible outcome types:')
 # print(nonBlankOutComes['Outcome Type'].unique())
@@ -35,9 +35,10 @@ allAdoptedSpecies = outtakes[(outtakes['Outcome Type'] == 'Adoption')]
 # 49% for our limited view of texas?
 
 # see biggest outcome
-df = pd.DataFrame(nonBlankOutComes['Outcome Type'].value_counts().head(4))
-df.plot.bar(legend=None,title='Most Common Outcomes')
-plt.show()
+print(nonBlankOutComes['Outcome Type'].value_counts())
+# df = pd.DataFrame(nonBlankOutComes['Outcome Type'].value_counts().head(5))
+# df.plot.bar(legend=None,title='Most Common Outcomes',color='orange')
+# plt.show()
 
 # # save counts + labels to seperate lists 
 # values = labelVals.to_list()
@@ -56,8 +57,8 @@ plt.show()
 # labels = allAdoptedDogs['Breed'].unique()
 # print(allAdoptedDogs['Breed'].value_counts())
 # df = pd.DataFrame({'label': labels, 'value': values})
-# df = df.sort_values('value', ascending=False).head(15)
-# plt.title("Top 15 dog breeds in Austin by adoptions")
+# df = df.sort_values('value', ascending=False).head(5)
+# plt.title("Top 5 Dog Breeds in Austin by Adoptions")
 # plt.xlabel("Number of adopts")
 # plt.ylabel("Dog breeds")
 # plt.barh(df['label'], df['value'])
@@ -66,12 +67,15 @@ plt.show()
 
 # top adopted species
 # df = pd.DataFrame({'Animal Type': ['Dog','Cat','Other'], 'count':[47475,35784,1002+323+17]})
-# plot = df.plot.pie(y="count", figsize=(11, 6),labels=df['Animal Type'].values,legend=None,autopct='%1.1f%%',title='Most Adopted Animals By Breed')
+# plot = df.plot.pie(y="count", figsize=(11, 6),labels=df['Animal Type'].values,legend=None,autopct='%1.1f%%',title='Most Adopted Animals By Breed',colors=['#999999', '#e41a1c', '#dede00'])
 # plt.show()
 
 # get specific about the 'other' section
 # otherBits = allAdoptedSpecies[(allAdoptedSpecies['Outcome Type'] == 'Adoption') & (allAdoptedSpecies['Animal Type'] == 'Other')]
-# print(otherBits['Breed'].value_counts(sort=False))
+# df =pd.DataFrame(otherBits['Breed'].value_counts().head(5))
+# df.plot.barh(stacked=True)
+# plt.show()
+#print(otherBits['Breed'].value_counts(sort=False))
 
 # top age - dont know how reliable this is. this is only the AGE of the animal, not its length of stay in the center.
 # labelVals = allAdoptedSpecies['Age upon Outcome'].value_counts()
@@ -82,3 +86,7 @@ plt.show()
 # labelVals = allAdoptedSpecies['Sex upon Outcome'].value_counts()
 # print(labelVals)
 
+# talk abt the bats bro
+allBats = pd.DataFrame(nonBlankOutComes[nonBlankOutComes['Breed'] == 'Bat Mix'])
+print(allBats['Outcome Type'].value_counts())
+print(allBats['Color'].value_counts())
