@@ -65,6 +65,20 @@ print(len(nonBlankOutComes.index))
 # plt.gca().invert_yaxis()
 # plt.show()
 
+# top dog colors
+# allAdoptedDogs = outtakes[(outtakes['Outcome Type'] == 'Adoption')  & (outtakes['Animal Type'] == 'Dog')]
+# labelVals = allAdoptedDogs['Color'].value_counts(sort=False)
+# values = labelVals.to_list()
+# labels = allAdoptedDogs['Color'].unique()
+# print(allAdoptedDogs['Color'].value_counts())
+# df = pd.DataFrame({'label': labels, 'value': values})
+# df = df.sort_values('value', ascending=False).head(5)
+# plt.title("Top 5 Dog Colors in Austin by Adoptions")
+# plt.xlabel("Number of adopts")
+# plt.ylabel("Dog colors")
+# plt.barh(df['label'], df['value'])
+# plt.gca().invert_yaxis()
+# plt.show()
 # top adopted species
 # df = pd.DataFrame({'Animal Type': ['Dog','Cat','Other'], 'count':[47475,35784,1002+323+17]})
 # plot = df.plot.pie(y="count", figsize=(11, 6),labels=df['Animal Type'].values,legend=None,autopct='%1.1f%%',title='Most Adopted Animals By Breed',colors=['#999999', '#e41a1c', '#dede00'])
