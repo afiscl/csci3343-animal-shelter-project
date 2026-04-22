@@ -35,7 +35,7 @@ print(len(nonBlankOutComes.index))
 # 49% for our limited view of texas?
 
 # see biggest outcome
-print(nonBlankOutComes['Outcome Type'].value_counts())
+#print(nonBlankOutComes['Outcome Type'].value_counts())
 # df = pd.DataFrame(nonBlankOutComes['Outcome Type'].value_counts().head(5))
 # df.plot.bar(legend=None,title='Most Common Outcomes',color='orange')
 # plt.show()
@@ -70,7 +70,7 @@ print(nonBlankOutComes['Outcome Type'].value_counts())
 # plot = df.plot.pie(y="count", figsize=(11, 6),labels=df['Animal Type'].values,legend=None,autopct='%1.1f%%',title='Most Adopted Animals By Breed',colors=['#999999', '#e41a1c', '#dede00'])
 # plt.show()
 
-# get specific about the 'other' section
+# get specific about the 'other' section (adoptions)
 # otherBits = allAdoptedSpecies[(allAdoptedSpecies['Outcome Type'] == 'Adoption') & (allAdoptedSpecies['Animal Type'] == 'Other')]
 # df =pd.DataFrame(otherBits['Breed'].value_counts().head(5))
 # df.plot.barh(stacked=True)
@@ -87,6 +87,28 @@ print(nonBlankOutComes['Outcome Type'].value_counts())
 # print(labelVals)
 
 # talk abt the bats bro
-allBats = pd.DataFrame(nonBlankOutComes[nonBlankOutComes['Breed'] == 'Bat Mix'])
-print(allBats['Outcome Type'].value_counts())
-print(allBats['Color'].value_counts())
+# allBats = pd.DataFrame(nonBlankOutComes[nonBlankOutComes['Breed'] == 'Bat Mix'])
+# print(allBats['Outcome Type'].value_counts())
+# print(allBats['Color'].value_counts())
+
+# get specific about the 'other' section (just in general)
+otherBits = nonBlankOutComes[nonBlankOutComes['Animal Type'] == 'Other']
+df =pd.DataFrame(otherBits['Breed'].value_counts().head(5))
+df = df.iloc[::-1]
+df_counts = df.reset_index()
+df_counts.columns = ['label', 'value']
+
+fig, axes = plt.subplots()
+axes.hlines(df_counts['label'], xmin=0,
+            xmax=df_counts['value'], colors='brown')
+
+axes.plot(df_counts['value'],df_counts['label'], "o",color='brown')
+axes.set_xlim(0)
+
+plt.xlabel('Count')
+plt.ylabel('Type of Animal')
+plt.title('Other Animals Coming Out of Austin Animal Center')
+plt.yticks(df_counts['label'])
+plt.show()
+print(len(otherBits.index))
+print(otherBits['Breed'].value_counts())
